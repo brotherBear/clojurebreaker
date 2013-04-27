@@ -1,10 +1,13 @@
 # clojurebreaker
 
-A Clojure library designed to ... well, that part is up to you.
+This is largely based on the example in chapter 10 of Programming Clojure 2nd ed. 
 
 ## Usage
 
-FIXME
+TBD. 
+
+In general, I recommend you get the book for yourself instead of cloning this repo. The learning is in typing in the stuff on your own.
+
 
 ## License
 
