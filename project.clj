@@ -7,6 +7,8 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/test.generative "0.1.3"]
                  [compojure "1.1.5"]
+                 [ring/ring-core "1.1.8"]
+                 [hiccup "1.0.3"]
                  [org.clojure/math.combinatorics "0.0.1"]]
   :plugins [[lein-ring "0.8.3"]]
   :ring {:handler clojurebreaker.handler/app}
