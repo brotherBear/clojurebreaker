@@ -1,4 +1,5 @@
-(ns clojurebreaker.models.game)
+(ns clojurebreaker.models.game
+  (:require [clojure.test.generative.generators :as gen]))
 
 (defn create []
-  (vec (repeatedly 4 (fn [] (rand-nth ["r" "g" "b" "y"])))))
+  (gen/vec #(gen/one-of "r" "g" "b" "y") 4))
