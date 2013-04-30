@@ -8,6 +8,7 @@
                  [org.clojure/test.generative "0.1.3"]
                  [compojure "1.1.5"]
                  [ring/ring-core "1.1.8"]
+                 [sandbar/sandbar "0.4.0-SNAPSHOT"]
                  [hiccup "1.0.3"]
                  [org.clojure/math.combinatorics "0.0.1"]]
   :plugins [[lein-ring "0.8.3"]]

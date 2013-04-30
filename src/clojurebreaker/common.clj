@@ -4,6 +4,6 @@
 
 (defhtml layout [& body]
   [:head
-   [:title "Welcome to myapp"]
+   [:title "Welcome to ClojureBreaker!"]
    (include-css "/css/screen.css")]
   (into [:body] body))

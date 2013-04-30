@@ -1,37 +1,25 @@
 (ns clojurebreaker.handler
   (:use [compojure.core]
-        [hiccup.form]
-        [hiccup.page]
-        [ring.middleware.session])
-  (:require [compojure.handler :as handler]
-            [compojure.route :as route]
-            [clojurebreaker.common :as common]))
+        [ring.middleware.file :only [wrap-file]]
+;        [ring.middleware.session]
+        [sandbar.stateful-session])
+  (:require [compojure.route :as route]
+            [clojurebreaker.common :as common]
+            [ring.middleware.stacktrace :as trace]))
 
-(defn message []
-  (html5
-   [:body
-    (form-to [:post "/message"]
-             (text-area {:placeholder "say something..."} "message")
-             [:br]
-             (text-field {:placeholder "name"} "id")
-             (submit-button "post message"))]))
-
-(defn display-message [params]
-  (let [form-params (:form-params params)]
-    (html5
-      [:body
-       [:p (get form-params "id") " says " (get form-params "message")]])))
 
 (defn welcome []
-  (common/layout
-   [:p "Welcome to clojurebreaker! Your current game ID is TBD" ]))
+  (let [counter (+ 1 (session-get :counter 0))]
+    (do (session-put! :counter counter)
+        (common/layout
+         [:p "Stateful clojurebreaker " counter]))))
 
 (defroutes app-routes
   (GET "/" [] (welcome))
-  (GET "/message" [] (message))
-  (POST "/message" params (display-message params))
   (route/resources "/")
   (route/not-found "Not Found"))
 
 (def app
-  (handler/site app-routes))
+  (-> app-routes
+      trace/wrap-stacktrace
+      wrap-stateful-session))
